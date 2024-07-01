@@ -1,10 +1,11 @@
 package com.vestuario.lori.projsb.Entities;
+import com.vestuario.lori.projsb.DTO.VestimentaDTO;
 import com.vestuario.lori.projsb.Entities.enums.Categoria;
 import jakarta.persistence.*;
 import lombok.*;
 
 @Entity(name = "Vestimenta") // especificando que é uma entidade && o nome da entidade
-@Table(name = "Vestimentas") // especificando nome da tabela
+@Table(name = "Vestuário") // especificando nome da tabela
 @Getter
 @Setter
 @AllArgsConstructor
@@ -24,4 +25,12 @@ public class Vestimenta {
     private Integer quantidade;
     private Double preco;
 
+    public Vestimenta(VestimentaDTO dados) { //esse construtor foi criado para ser usado no controller (operação de cadastrar nova vestimenta)
+        this.nome = dados.nome();
+        this.marca = dados.marca();
+        this.categoria = dados.categoria();
+        this.cor = dados.cor();
+        this.quantidade = dados.quantidade();
+        this.preco = dados.preco();
+    }
 }
