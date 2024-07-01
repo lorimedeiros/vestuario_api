@@ -8,6 +8,4 @@ public record VestimentaDTO(String nome,
                             Integer quantidade,
                             Double preco) {
 
-    //
-
 }
