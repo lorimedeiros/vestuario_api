@@ -43,13 +43,18 @@ public class Vestimenta {
     }
 
     public void inativar() {
-        this.ativo = false;
-        this.quantidade = 0;
+        if (ativo){
+            this.ativo = false;
+            this.quantidade = 0;
+        }
+
     }
 
     public void ativar() {
-        this.ativo = true;
-        this.quantidade = 5;
+        if(!ativo){
+            this.ativo = true;
+            this.quantidade = 5;
+        }
         //levando em consideraçãp que as remessas de roupas tenha quantidade minima de reposição de 5
     }
 }

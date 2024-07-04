@@ -1,5 +1,4 @@
 package com.vestuario.lori.projsb.Controllers;
-
 import com.vestuario.lori.projsb.DTO.DadosAtualizarVestimentaDTO;
 import com.vestuario.lori.projsb.DTO.DadosCadastroVestimentaDTO;
 import com.vestuario.lori.projsb.DTO.DadosListagemVestimentaDTO;
@@ -8,6 +7,7 @@ import com.vestuario.lori.projsb.Repositories.VestimentaRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,44 +21,58 @@ public class VestimentaController {
 
     @PostMapping
     @Transactional //
-    public void cadastrar(@RequestBody @Valid DadosCadastroVestimentaDTO dados){
+    public ResponseEntity<> cadastrar(@RequestBody @Valid DadosCadastroVestimentaDTO dados){
         repository.save(new Vestimenta(dados));
+
+        return ;
     }
 
     @GetMapping("estoquegeral")
-    public List<DadosListagemVestimentaDTO> listarTodos(){
-        return repository.findAll().stream().map(DadosListagemVestimentaDTO::new).toList();
+    public ResponseEntity<List<DadosListagemVestimentaDTO>> listarTodos(){
+        var lista =  repository.findAll().stream().map(DadosListagemVestimentaDTO::new).toList();
+
+        return ResponseEntity.ok(lista);
     }
 
     @GetMapping("estoqueativo")
-    public List<DadosListagemVestimentaDTO> listarAtivos(){
-        return repository.findAllByAtivoTrue().stream().map(DadosListagemVestimentaDTO::new).toList();
+    public ResponseEntity<List<DadosListagemVestimentaDTO>> listarAtivos(){
+        var lista =  repository.findAllByAtivoTrue().stream().map(DadosListagemVestimentaDTO::new).toList();
+
+        return ResponseEntity.ok(lista);
     }
 
     @PutMapping
     @Transactional
-    public void atualizar(@RequestBody @Valid DadosAtualizarVestimentaDTO dados){
+    public ResponseEntity<DadosDetalhamentoVestimentaDTO> atualizar(@RequestBody @Valid DadosAtualizarVestimentaDTO dados){
         var vest = repository.getReferenceById(dados.id());
         vest.atualizarInformacoes(dados);
+
+        return ResponseEntity.ok(new DadosDetalhamentoVestimentaDTO(vest));
     }
 
     @PutMapping("ativar/{id}")
     @Transactional
-    public void ativar(@PathVariable Long id){
+    public ResponseEntity<DadosDetalhamentoVestimentaDTO> ativar(@PathVariable Long id){
         var vest = repository.getReferenceById(id);
         vest.ativar();
+
+        return ResponseEntity.ok(new DadosDetalhamentoVestimentaDTO(vest));
     }
 
     @DeleteMapping("/{id}")
     @Transactional
-    public void excluir(@PathVariable Long id){
+    public ResponseEntity<Void> excluir(@PathVariable Long id){
         repository.deleteById(id);
+
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("inativar/{id}")
     @Transactional
-    public void inativar(@PathVariable Long id){
+    public ResponseEntity<Void> inativar(@PathVariable Long id){
         var vest = repository.getReferenceById(id);
         vest.inativar();
+
+        return ResponseEntity.noContent().build();
     }
 }
