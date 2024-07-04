@@ -42,6 +42,13 @@ public class VestimentaController {
         vest.atualizarInformacoes(dados);
     }
 
+    @PutMapping("ativar/{id}")
+    @Transactional
+    public void ativar(@PathVariable Long id){
+        var vest = repository.getReferenceById(id);
+        vest.ativar();
+    }
+
     @DeleteMapping("/{id}")
     @Transactional
     public void excluir(@PathVariable Long id){
