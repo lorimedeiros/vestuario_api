@@ -25,9 +25,14 @@ public class VestimentaController {
         repository.save(new Vestimenta(dados));
     }
 
-    @GetMapping
-    public List<DadosListagemVestimentaDTO> listar(){
+    @GetMapping("estoquegeral")
+    public List<DadosListagemVestimentaDTO> listarTodos(){
         return repository.findAll().stream().map(DadosListagemVestimentaDTO::new).toList();
+    }
+
+    @GetMapping("estoqueativo")
+    public List<DadosListagemVestimentaDTO> listarAtivos(){
+        return repository.findAllByAtivoTrue().stream().map(DadosListagemVestimentaDTO::new).toList();
     }
 
     @PutMapping
@@ -41,5 +46,12 @@ public class VestimentaController {
     @Transactional
     public void excluir(@PathVariable Long id){
         repository.deleteById(id);
+    }
+
+    @DeleteMapping("inativar/{id}")
+    @Transactional
+    public void inativar(@PathVariable Long id){
+        var vest = repository.getReferenceById(id);
+        vest.inativar();
     }
 }

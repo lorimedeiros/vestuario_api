@@ -24,6 +24,7 @@ public class Vestimenta {
     private String cor;
     private Integer quantidade;
     private Double preco;
+    private Boolean ativo;
 
     public Vestimenta(DadosCadastroVestimentaDTO dados) {
         this.nome = dados.nome();
@@ -32,11 +33,16 @@ public class Vestimenta {
         this.cor = dados.cor();
         this.quantidade = dados.quantidade();
         this.preco = dados.preco();
+        this.ativo = true; //sempre que cadastrar uma vestimenta será true (tem no estoque)
     }
 
     public void atualizarInformacoes(DadosAtualizarVestimentaDTO dados) {
         if (dados.nome() != null){this.nome = dados.nome();}
         if (dados.quantidade() != null){this.quantidade = dados.quantidade();}
         if (dados.preco() != null){this.preco = dados.preco();}
+    }
+
+    public void inativar() {
+        this.ativo = false;
     }
 }
