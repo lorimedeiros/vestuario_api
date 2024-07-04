@@ -1,5 +1,6 @@
 package com.vestuario.lori.projsb.Entities;
-import com.vestuario.lori.projsb.DTO.VestimentaDTO;
+import com.vestuario.lori.projsb.DTO.DadosAtualizarVestimentaDTO;
+import com.vestuario.lori.projsb.DTO.DadosCadastroVestimentaDTO;
 import com.vestuario.lori.projsb.Entities.enums.Categoria;
 import jakarta.persistence.*;
 import lombok.*;
@@ -24,12 +25,18 @@ public class Vestimenta {
     private Integer quantidade;
     private Double preco;
 
-    public Vestimenta(VestimentaDTO dados) {
+    public Vestimenta(DadosCadastroVestimentaDTO dados) {
         this.nome = dados.nome();
         this.marca = dados.marca();
         this.categoria = dados.categoria();
         this.cor = dados.cor();
         this.quantidade = dados.quantidade();
         this.preco = dados.preco();
+    }
+
+    public void atualizarInformacoes(DadosAtualizarVestimentaDTO dados) {
+        if (dados.nome() != null){this.nome = dados.nome();}
+        if (dados.quantidade() != null){this.quantidade = dados.quantidade();}
+        if (dados.preco() != null){this.preco = dados.preco();}
     }
 }

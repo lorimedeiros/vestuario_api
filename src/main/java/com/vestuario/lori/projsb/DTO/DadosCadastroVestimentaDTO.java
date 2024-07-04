@@ -5,7 +5,7 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 
-public record VestimentaDTO(
+public record DadosCadastroVestimentaDTO(
         @NotBlank
         String nome,
         @NotBlank
@@ -17,6 +17,4 @@ public record VestimentaDTO(
         @Min(0)
         Integer quantidade,
         @Positive
-        Double preco) {
-
-}
+        Double preco) { }
