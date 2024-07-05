@@ -9,6 +9,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 
@@ -21,10 +22,13 @@ public class VestimentaController {
 
     @PostMapping
     @Transactional //
-    public ResponseEntity<> cadastrar(@RequestBody @Valid DadosCadastroVestimentaDTO dados){
-        repository.save(new Vestimenta(dados));
+    public ResponseEntity<DadosDetalhamentoVestimentaDTO> cadastrar(@RequestBody @Valid DadosCadastroVestimentaDTO dados, UriComponentsBuilder uriBuilder){
+        var vest = new Vestimenta(dados); //variavel recebendo nova vestimenta instanciada tendo como parametro os dados recebidos no corpo da rqeuisição
+        repository.save(vest); //salvando vestimenta na db
 
-        return ;
+        var uri = uriBuilder.path("/vestuario/{id}").buildAndExpand(vest.getId()).toUri(); //variavel que armazena o caminho da vestimenta criada com id
+
+        return ResponseEntity.created(uri).body(new DadosDetalhamentoVestimentaDTO(vest)); //retorno do response entity + url + dto da vestimenta criada
     }
 
     @GetMapping("estoquegeral")
