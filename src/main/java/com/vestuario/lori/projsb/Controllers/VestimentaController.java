@@ -45,6 +45,13 @@ public class VestimentaController {
         return ResponseEntity.ok(lista);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<DadosDetalhamentoVestimentaDTO> detalhar(@PathVariable Long id){
+        var vest = repository.getReferenceById(id);
+
+        return ResponseEntity.ok(new DadosDetalhamentoVestimentaDTO(vest));
+    }
+
     @PutMapping
     @Transactional
     public ResponseEntity<DadosDetalhamentoVestimentaDTO> atualizar(@RequestBody @Valid DadosAtualizarVestimentaDTO dados){
