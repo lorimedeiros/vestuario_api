@@ -33,7 +33,7 @@ public class Vestimenta {
         this.cor = dados.cor();
         this.quantidade = dados.quantidade();
         this.preco = dados.preco();
-        this.ativo = true; //sempre que cadastrar uma vestimenta será true (tem no estoque)
+        this.ativo = true;
     }
 
     public void atualizarInformacoes(DadosAtualizarVestimentaDTO dados) {
@@ -55,6 +55,5 @@ public class Vestimenta {
             this.ativo = true;
             this.quantidade = 5;
         }
-        //levando em consideraçãp que as remessas de roupas tenha quantidade minima de reposição de 5
     }
 }

@@ -10,8 +10,7 @@ public class ArgumentNotValidException {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<?> tratador400(MethodArgumentNotValidException ex){
-        var erros = ex.getFieldErrors(); //capturando os campos em que ocorreu o erro
-
+        var erros = ex.getFieldErrors();
         return ResponseEntity.badRequest().body(erros.stream().map(DadosErroDTO::new).toList());
     }
 

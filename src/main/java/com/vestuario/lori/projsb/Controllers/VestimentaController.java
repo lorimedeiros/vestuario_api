@@ -23,12 +23,12 @@ public class VestimentaController {
     @PostMapping
     @Transactional //
     public ResponseEntity<DadosDetalhamentoVestimentaDTO> cadastrar(@RequestBody @Valid DadosCadastroVestimentaDTO dados, UriComponentsBuilder uriBuilder){
-        var vest = new Vestimenta(dados); //variavel recebendo nova vestimenta instanciada tendo como parametro os dados recebidos no corpo da rqeuisição
-        repository.save(vest); //salvando vestimenta na db
+        var vest = new Vestimenta(dados);
+        repository.save(vest);
 
-        var uri = uriBuilder.path("/vestuario/{id}").buildAndExpand(vest.getId()).toUri(); //variavel que armazena o caminho da vestimenta criada com id
+        var uri = uriBuilder.path("/vestuario/{id}").buildAndExpand(vest.getId()).toUri();
 
-        return ResponseEntity.created(uri).body(new DadosDetalhamentoVestimentaDTO(vest)); //retorno do response entity + url + dto da vestimenta criada
+        return ResponseEntity.created(uri).body(new DadosDetalhamentoVestimentaDTO(vest));
     }
 
     @GetMapping("estoquegeral")
