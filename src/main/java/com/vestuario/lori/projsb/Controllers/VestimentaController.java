@@ -1,6 +1,7 @@
 package com.vestuario.lori.projsb.Controllers;
 import com.vestuario.lori.projsb.DTO.DadosAtualizarVestimentaDTO;
 import com.vestuario.lori.projsb.DTO.DadosCadastroVestimentaDTO;
+import com.vestuario.lori.projsb.DTO.DadosDetalhamentoVestimentaDTO;
 import com.vestuario.lori.projsb.DTO.DadosListagemVestimentaDTO;
 import com.vestuario.lori.projsb.Entities.Vestimenta;
 import com.vestuario.lori.projsb.Repositories.VestimentaRepository;

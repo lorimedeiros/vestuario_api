@@ -1,4 +1,4 @@
-package com.vestuario.lori.projsb.Controllers;
+package com.vestuario.lori.projsb.DTO;
 
 import com.vestuario.lori.projsb.Entities.Vestimenta;
 import com.vestuario.lori.projsb.Entities.enums.Categoria;
